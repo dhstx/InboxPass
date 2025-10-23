@@ -1,14 +1,21 @@
 {
   "version": 2,
-  "buildCommand": "pnpm install && pnpm build",
-  "devCommand": "pnpm dev",
+  "buildCommand": "pnpm install && pnpm run build:frontend",
   "installCommand": "pnpm install",
   "framework": null,
   "outputDirectory": "dist/public",
   "rewrites": [
     {
-      "source": "/api/:path*",
-      "destination": "/api/:path*"
+      "source": "/api/trpc/:path*",
+      "destination": "https://3000-ien5pg0d6zwac274zk4rq-6ff05c9c.manus.computer/api/trpc/:path*"
+    },
+    {
+      "source": "/api/stripe/webhook",
+      "destination": "https://3000-ien5pg0d6zwac274zk4rq-6ff05c9c.manus.computer/api/stripe/webhook"
+    },
+    {
+      "source": "/api/oauth/:path*",
+      "destination": "https://3000-ien5pg0d6zwac274zk4rq-6ff05c9c.manus.computer/api/oauth/:path*"
     },
     {
       "source": "/(.*)",
@@ -30,17 +37,27 @@
         {
           "key": "X-XSS-Protection",
           "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
         }
       ]
     }
   ],
-  "functions": {
-    "server/_core/index.ts": {
-      "runtime": "nodejs20.x",
-      "memory": 1024,
-      "maxDuration": 30
-    }
-  },
   "env": {
     "NODE_ENV": "production"
   }

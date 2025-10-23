@@ -1,0 +1,32 @@
+# Backend files (runs on Manus)
+server/
+drizzle/
+storage/
+
+# Development files
+node_modules/
+.git/
+.env
+.env.local
+*.log
+
+# Test files
+test-integration.ts
+test-integration.mjs
+*.test.ts
+*.spec.ts
+
+# Documentation
+*.md
+!README.md
+
+# Build artifacts
+dist/index.js
+dist/_core/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
